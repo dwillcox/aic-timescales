@@ -11,3 +11,5 @@ directory and run `setup.sh`.
 To run the notebook, also follow the setup instructions in
 `Microphysics/python_library/StarKiller/README.md` where the
 Microphysics python bindings are compiled with `NETWORK_DIR=ECSN`.
+
+Tested with Python 3 and the development branch of Microphysics.
