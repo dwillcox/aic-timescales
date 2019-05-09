@@ -1,0 +1,1004 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{ECSN-Profile-Comparison}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{ecsn-profile-comparison}{%
+\section{ECSN Profile Comparison}\label{ecsn-profile-comparison}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{StarKiller}\PY{n+nn}{.}\PY{n+nn}{initialization} \PY{k}{import} \PY{n}{starkiller\PYZus{}initialize}
+        \PY{k+kn}{from} \PY{n+nn}{StarKiller}\PY{n+nn}{.}\PY{n+nn}{interfaces} \PY{k}{import} \PY{n}{EosType}
+        \PY{k+kn}{from} \PY{n+nn}{StarKiller}\PY{n+nn}{.}\PY{n+nn}{interfaces} \PY{k}{import} \PY{n}{BurnType}
+        \PY{k+kn}{from} \PY{n+nn}{StarKiller}\PY{n+nn}{.}\PY{n+nn}{eos} \PY{k}{import} \PY{n}{Eos}
+        \PY{k+kn}{from} \PY{n+nn}{StarKiller}\PY{n+nn}{.}\PY{n+nn}{network} \PY{k}{import} \PY{n}{Network}
+        \PY{k+kn}{from} \PY{n+nn}{StarKiller}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{AmrexAstroModel}
+        \PY{k+kn}{from} \PY{n+nn}{mesa\PYZus{}reader} \PY{k}{import} \PY{n}{MesaData}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \hypertarget{initialize-starkiller-microphysics}{%
+\subsection{Initialize Starkiller
+Microphysics}\label{initialize-starkiller-microphysics}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{probin\PYZus{}file} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{probin\PYZus{}ecsn}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{starkiller\PYZus{}initialize}\PY{p}{(}\PY{n}{probin\PYZus{}file}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{helmholtz} \PY{o}{=} \PY{n}{Eos}\PY{p}{(}\PY{p}{)}
+        \PY{n}{ecsn} \PY{o}{=} \PY{n}{Network}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{evaluate\PYZus{}rhs}\PY{p}{(}\PY{n}{burn\PYZus{}state}\PY{p}{)}\PY{p}{:}
+            \PY{n}{ecsn}\PY{o}{.}\PY{n}{rhs}\PY{p}{(}\PY{n}{burn\PYZus{}state}\PY{p}{)}
+            \PY{k}{return} \PY{n}{burn\PYZus{}state}
+        
+        \PY{k}{def} \PY{n+nf}{evaluate\PYZus{}eos}\PY{p}{(}\PY{n}{burn\PYZus{}state}\PY{p}{)}\PY{p}{:}
+            \PY{n}{eos\PYZus{}state} \PY{o}{=} \PY{n}{burn\PYZus{}state}\PY{o}{.}\PY{n}{to\PYZus{}eos\PYZus{}type}\PY{p}{(}\PY{p}{)}
+            \PY{n}{helmholtz}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{n}{eos\PYZus{}state}\PY{o}{.}\PY{n}{eos\PYZus{}input\PYZus{}rt}\PY{p}{,} \PY{n}{eos\PYZus{}state}\PY{p}{)}
+            \PY{k}{return} \PY{n}{eos\PYZus{}state}
+\end{Verbatim}
+
+
+    \hypertarget{read-mesa-profile}{%
+\subsection{Read MESA profile}\label{read-mesa-profile}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{mesa\PYZus{}data} \PY{o}{=} \PY{n}{MesaData}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../../../../profiles/ONe6040\PYZhy{}final.data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{mesa\PYZus{}enuc} \PY{o}{=} \PY{n}{mesa\PYZus{}data}\PY{o}{.}\PY{n}{eps\PYZus{}nuc\PYZus{}mc2} \PY{o}{\PYZhy{}} \PY{n}{mesa\PYZus{}data}\PY{o}{.}\PY{n}{eps\PYZus{}nuc\PYZus{}neu}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{shared\PYZus{}species} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+        \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{ecsn}\PY{o}{.}\PY{n}{short\PYZus{}species\PYZus{}names}\PY{p}{:}
+            \PY{k}{if} \PY{n}{s} \PY{o+ow}{in} \PY{n}{mesa\PYZus{}data}\PY{o}{.}\PY{n}{bulk\PYZus{}names}\PY{p}{:}
+                \PY{n}{shared\PYZus{}species}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{s}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Species shared between MESA and Starkiller networks:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{shared\PYZus{}species}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{s}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Species shared between MESA and Starkiller networks:
+
+h1
+he4
+o16
+o20
+f20
+ne20
+mg24
+si28
+
+    \end{Verbatim}
+
+    \hypertarget{evaluate-the-starkiller-equivalent-of-mesa-eps_nuc_mc2---eps_nuc_neu}{%
+\subsection{Evaluate the Starkiller equivalent of MESA (eps\_nuc\_mc2 -
+eps\_nuc\_neu)}\label{evaluate-the-starkiller-equivalent-of-mesa-eps_nuc_mc2---eps_nuc_neu}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{sk\PYZus{}burn\PYZus{}results} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{sk\PYZus{}eos\PYZus{}results} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+        \PY{k}{for} \PY{n}{zi} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{mesa\PYZus{}data}\PY{o}{.}\PY{n}{zone}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{density} \PY{o}{=} \PY{l+m+mf}{10.0}\PY{o}{*}\PY{o}{*}\PY{n}{mesa\PYZus{}data}\PY{o}{.}\PY{n}{logRho}\PY{p}{[}\PY{n}{zi}\PY{p}{]}
+            \PY{n}{temperature} \PY{o}{=} \PY{l+m+mf}{10.0}\PY{o}{*}\PY{o}{*}\PY{n}{mesa\PYZus{}data}\PY{o}{.}\PY{n}{logT}\PY{p}{[}\PY{n}{zi}\PY{p}{]}
+            
+            \PY{c+c1}{\PYZsh{} Set mass fractions for Starkiller network by zeroing}
+            \PY{c+c1}{\PYZsh{} mass fractions for species missing in the MESA network and ignoring}
+            \PY{c+c1}{\PYZsh{} species missing in the Starkiller network.}
+            \PY{c+c1}{\PYZsh{}}
+            \PY{c+c1}{\PYZsh{} Then renormalize the Starkiller mass fractions to sum to 1.}
+            \PY{n}{mass\PYZus{}fractions} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            
+            \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{ecsn}\PY{o}{.}\PY{n}{short\PYZus{}species\PYZus{}names}\PY{p}{:}
+                \PY{k}{if} \PY{n}{s} \PY{o+ow}{in} \PY{n}{mesa\PYZus{}data}\PY{o}{.}\PY{n}{bulk\PYZus{}names}\PY{p}{:}
+                    \PY{n}{mass\PYZus{}fractions}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{mesa\PYZus{}data}\PY{o}{.}\PY{n}{data}\PY{p}{(}\PY{n}{s}\PY{p}{)}\PY{p}{[}\PY{n}{zi}\PY{p}{]}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{mass\PYZus{}fractions}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{)}
+            
+            \PY{n}{mass\PYZus{}fractions} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{mass\PYZus{}fractions}\PY{p}{)}
+            \PY{n}{mass\PYZus{}fractions} \PY{o}{=} \PY{n}{mass\PYZus{}fractions}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{mass\PYZus{}fractions}\PY{p}{)}
+            
+            
+            \PY{n}{burn\PYZus{}state} \PY{o}{=} \PY{n}{BurnType}\PY{p}{(}\PY{p}{)}
+            \PY{n}{burn\PYZus{}state}\PY{o}{.}\PY{n}{state}\PY{o}{.}\PY{n}{rho} \PY{o}{=} \PY{n}{density}
+            \PY{n}{burn\PYZus{}state}\PY{o}{.}\PY{n}{state}\PY{o}{.}\PY{n}{t} \PY{o}{=} \PY{n}{temperature}
+            \PY{n}{burn\PYZus{}state}\PY{o}{.}\PY{n}{state}\PY{o}{.}\PY{n}{xn} \PY{o}{=} \PY{n}{mass\PYZus{}fractions}
+            
+            \PY{c+c1}{\PYZsh{} Evaluate the RHS and EOS in Starkiller}
+            \PY{n}{sk\PYZus{}burn\PYZus{}results}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{evaluate\PYZus{}rhs}\PY{p}{(}\PY{n}{burn\PYZus{}state}\PY{p}{)}\PY{p}{)}
+            \PY{n}{sk\PYZus{}eos\PYZus{}results}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{evaluate\PYZus{}eos}\PY{p}{(}\PY{n}{burn\PYZus{}state}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{sk\PYZus{}eps} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{burn\PYZus{}state} \PY{o+ow}{in} \PY{n}{sk\PYZus{}burn\PYZus{}results}\PY{p}{:}
+             \PY{n}{sk\PYZus{}eps}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{burn\PYZus{}state}\PY{o}{.}\PY{n}{state}\PY{o}{.}\PY{n}{ydot}\PY{p}{[}\PY{n}{ecsn}\PY{o}{.}\PY{n}{net\PYZus{}ienuc}\PY{p}{]}\PY{p}{)}
+             
+         \PY{n}{sk\PYZus{}eps} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{sk\PYZus{}eps}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{read-maestroex-initial-model}{%
+\subsection{Read MaestroEx initial
+model}\label{read-maestroex-initial-model}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{maestro\PYZus{}data} \PY{o}{=} \PY{n}{AmrexAstroModel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ECSN\PYZhy{}ONe6040\PYZhy{}final.hse.10240}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{maestro\PYZus{}data}\PY{o}{.}\PY{n}{model\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{logRho}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{maestro\PYZus{}data}\PY{o}{.}\PY{n}{data}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{evaluate-energy-generation-rate-for-maestroex-initial-model}{%
+\subsection{Evaluate energy generation rate for MaestroEx initial
+model}\label{evaluate-energy-generation-rate-for-maestroex-initial-model}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{sk\PYZus{}maestro\PYZus{}burn\PYZus{}results} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{sk\PYZus{}maestro\PYZus{}eos\PYZus{}results} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{zi} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{maestro\PYZus{}data}\PY{o}{.}\PY{n}{size}\PY{p}{)}\PY{p}{:}
+             \PY{n}{mass\PYZus{}fractions} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             
+             \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{ecsn}\PY{o}{.}\PY{n}{short\PYZus{}species\PYZus{}names}\PY{p}{:}
+                 \PY{n}{mass\PYZus{}fractions}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{maestro\PYZus{}data}\PY{o}{.}\PY{n}{data}\PY{p}{(}\PY{n}{s}\PY{p}{)}\PY{p}{[}\PY{n}{zi}\PY{p}{]}\PY{p}{)}
+         
+             \PY{n}{mass\PYZus{}fractions} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{mass\PYZus{}fractions}\PY{p}{)}
+             \PY{n}{mass\PYZus{}fractions} \PY{o}{=} \PY{n}{mass\PYZus{}fractions}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{mass\PYZus{}fractions}\PY{p}{)}
+             
+             \PY{n}{burn\PYZus{}state} \PY{o}{=} \PY{n}{BurnType}\PY{p}{(}\PY{p}{)}
+             \PY{n}{burn\PYZus{}state}\PY{o}{.}\PY{n}{state}\PY{o}{.}\PY{n}{rho} \PY{o}{=} \PY{n}{maestro\PYZus{}data}\PY{o}{.}\PY{n}{data}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{n}{zi}\PY{p}{]}
+             \PY{n}{burn\PYZus{}state}\PY{o}{.}\PY{n}{state}\PY{o}{.}\PY{n}{t} \PY{o}{=} \PY{n}{maestro\PYZus{}data}\PY{o}{.}\PY{n}{data}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{n}{zi}\PY{p}{]}
+             \PY{n}{burn\PYZus{}state}\PY{o}{.}\PY{n}{state}\PY{o}{.}\PY{n}{xn} \PY{o}{=} \PY{n}{mass\PYZus{}fractions}
+             
+             \PY{c+c1}{\PYZsh{} Evaluate the RHS and EOS in Starkiller}
+             \PY{n}{sk\PYZus{}maestro\PYZus{}burn\PYZus{}results}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{evaluate\PYZus{}rhs}\PY{p}{(}\PY{n}{burn\PYZus{}state}\PY{p}{)}\PY{p}{)}
+             \PY{n}{sk\PYZus{}maestro\PYZus{}eos\PYZus{}results}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{evaluate\PYZus{}eos}\PY{p}{(}\PY{n}{burn\PYZus{}state}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{sk\PYZus{}maestro\PYZus{}eps} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{burn\PYZus{}state} \PY{o+ow}{in} \PY{n}{sk\PYZus{}maestro\PYZus{}burn\PYZus{}results}\PY{p}{:}
+             \PY{n}{sk\PYZus{}maestro\PYZus{}eps}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{burn\PYZus{}state}\PY{o}{.}\PY{n}{state}\PY{o}{.}\PY{n}{ydot}\PY{p}{[}\PY{n}{ecsn}\PY{o}{.}\PY{n}{net\PYZus{}ienuc}\PY{p}{]}\PY{p}{)}
+             
+         \PY{n}{sk\PYZus{}maestro\PYZus{}eps} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{sk\PYZus{}maestro\PYZus{}eps}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{plot-mesa-starkiller-mesa-and-starkiller-maestro-energy-generation-rates}{%
+\subsection{Plot MESA, Starkiller-MESA, and Starkiller-Maestro energy
+generation
+rates}\label{plot-mesa-starkiller-mesa-and-starkiller-maestro-energy-generation-rates}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{font\PYZus{}config} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{20}\PY{p}{\PYZcb{}}
+         \PY{n}{text\PYZus{}config} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{usetex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{k+kc}{True}\PY{p}{\PYZcb{}}
+         \PY{n}{figure\PYZus{}config} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dpi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{300}\PY{p}{\PYZcb{}}
+         
+         \PY{n}{matplotlib}\PY{o}{.}\PY{n}{rc}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{font}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{font\PYZus{}config}\PY{p}{)}
+         \PY{n}{matplotlib}\PY{o}{.}\PY{n}{rc}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{text\PYZus{}config}\PY{p}{)}
+         \PY{n}{matplotlib}\PY{o}{.}\PY{n}{rc}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{figure\PYZus{}config}\PY{p}{)}
+         
+         \PY{n}{mesa\PYZus{}enuc\PYZus{}pos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{n}{mesa\PYZus{}enuc}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{)}
+         \PY{n}{mesa\PYZus{}enuc\PYZus{}neg} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{mesa\PYZus{}enuc}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{)}
+         
+         \PY{n}{sk\PYZus{}enuc\PYZus{}pos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{n}{sk\PYZus{}eps}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{)}
+         \PY{n}{sk\PYZus{}enuc\PYZus{}neg} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{sk\PYZus{}eps}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{)}
+         
+         \PY{n}{sk\PYZus{}maestro\PYZus{}enuc\PYZus{}pos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{n}{sk\PYZus{}maestro\PYZus{}eps}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{)}
+         \PY{n}{sk\PYZus{}maestro\PYZus{}enuc\PYZus{}neg} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{sk\PYZus{}maestro\PYZus{}eps}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{)}
+         
+         \PY{n}{radius\PYZus{}km} \PY{o}{=} \PY{n}{mesa\PYZus{}data}\PY{o}{.}\PY{n}{radius\PYZus{}cm} \PY{o}{*} \PY{l+m+mf}{1.0e\PYZhy{}5}
+         
+         \PY{c+c1}{\PYZsh{} The order of zones in MESA and Maestro are reverse from each other}
+         \PY{c+c1}{\PYZsh{} so define a separate radius array for the Maestro data}
+         \PY{n}{maestro\PYZus{}radius\PYZus{}km} \PY{o}{=} \PY{n}{maestro\PYZus{}data}\PY{o}{.}\PY{n}{data}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{radius}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{1.0e\PYZhy{}5}
+         
+         \PY{k}{def} \PY{n+nf}{plot\PYZus{}enuc}\PY{p}{(}\PY{n}{xlim}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{ylim}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+             \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{facecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}figheight}\PY{p}{(}\PY{l+m+mf}{10.0}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}figwidth}\PY{p}{(}\PY{l+m+mf}{10.0}\PY{p}{)}
+         
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{radius\PYZus{}km}\PY{p}{,} \PY{n}{mesa\PYZus{}enuc\PYZus{}pos}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                     \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{mathrm}\PY{l+s+si}{\PYZob{}MESA\PYZcb{}}\PY{l+s+s1}{\PYZdl{} \PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{dot}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{varepsilon\PYZcb{} \PYZgt{} 0\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{radius\PYZus{}km}\PY{p}{,} \PY{n}{mesa\PYZus{}enuc\PYZus{}neg}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                     \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{mathrm}\PY{l+s+si}{\PYZob{}MESA\PYZcb{}}\PY{l+s+s1}{\PYZdl{} \PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{dot}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{varepsilon\PYZcb{} \PYZlt{} 0\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{radius\PYZus{}km}\PY{p}{,} \PY{n}{sk\PYZus{}enuc\PYZus{}pos}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                     \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{mathrm}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{StarKiller\PYZhy{}MESA\PYZcb{}\PYZdl{} \PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{dot}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{varepsilon\PYZcb{} \PYZgt{} 0\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{radius\PYZus{}km}\PY{p}{,} \PY{n}{sk\PYZus{}enuc\PYZus{}neg}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                     \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{mathrm}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{StarKiller\PYZhy{}MESA\PYZcb{}\PYZdl{} \PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{dot}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{varepsilon\PYZcb{} \PYZlt{} 0\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{maestro\PYZus{}radius\PYZus{}km}\PY{p}{,} \PY{n}{sk\PYZus{}maestro\PYZus{}enuc\PYZus{}pos}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                     \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{mathrm}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{StarKiller\PYZhy{}Maestro\PYZcb{}\PYZdl{} \PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{dot}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{varepsilon\PYZcb{} \PYZgt{} 0\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{maestro\PYZus{}radius\PYZus{}km}\PY{p}{,} \PY{n}{sk\PYZus{}maestro\PYZus{}enuc\PYZus{}neg}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                     \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{mathrm}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{StarKiller\PYZhy{}Maestro\PYZcb{}\PYZdl{} \PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{dot}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{varepsilon\PYZcb{} \PYZlt{} 0\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}yscale}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{k}{if} \PY{n}{xlim}\PY{p}{:}
+                 \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{n}{xlim}\PY{p}{)}
+                 
+             \PY{k}{if} \PY{n}{ylim}\PY{p}{:}
+                 \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ylim}\PY{p}{)}
+         
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{mathrm}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{ (km)\PYZcb{}\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{dot}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{varepsilon\PYZcb{} = }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{dot}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{varepsilon\PYZcb{}\PYZus{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{m c\PYZca{}2\PYZcb{} \PYZhy{} |}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{dot}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{varepsilon\PYZcb{}\PYZus{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{nu\PYZcb{}|\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{bbox\PYZus{}to\PYZus{}anchor}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}field}\PY{p}{(}\PY{n}{xlim}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{ylim}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{field}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{temperature}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{logy}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+             \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{facecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}figheight}\PY{p}{(}\PY{l+m+mf}{10.0}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}figwidth}\PY{p}{(}\PY{l+m+mf}{10.0}\PY{p}{)}
+         
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{radius\PYZus{}km}\PY{p}{,} \PY{n}{mesa\PYZus{}data}\PY{o}{.}\PY{n}{data}\PY{p}{(}\PY{n}{field}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                     \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{mathrm}\PY{l+s+si}{\PYZob{}MESA\PYZcb{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{maestro\PYZus{}radius\PYZus{}km}\PY{p}{,} \PY{n}{maestro\PYZus{}data}\PY{o}{.}\PY{n}{data}\PY{p}{(}\PY{n}{field}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                     \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{mathrm}\PY{l+s+si}{\PYZob{}Maestro\PYZcb{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{k}{if} \PY{n}{xlim}\PY{p}{:}
+                 \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{n}{xlim}\PY{p}{)}
+                 
+             \PY{k}{if} \PY{n}{ylim}\PY{p}{:}
+                 \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ylim}\PY{p}{)}
+                 
+             \PY{k}{if} \PY{n}{logy}\PY{p}{:}
+                 \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}yscale}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{mathrm}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{ (km)\PYZcb{}\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{mathrm}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{field}\PY{p}{)} \PY{o}{+} \PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZcb{}\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{bbox\PYZus{}to\PYZus{}anchor}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{entire-profile}{%
+\subsubsection{Entire Profile}\label{entire-profile}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{plot\PYZus{}field}\PY{p}{(}\PY{n}{field}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{plot\PYZus{}field}\PY{p}{(}\PY{n}{field}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{logRho}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{plot-mass-fractions-for-species-shared-between-mesa-and-maestro}{%
+\subsubsection{Plot mass fractions for species shared between MESA and
+Maestro}\label{plot-mass-fractions-for-species-shared-between-mesa-and-maestro}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{shared\PYZus{}species}\PY{p}{:}
+             \PY{n}{plot\PYZus{}field}\PY{p}{(}\PY{n}{field}\PY{o}{=}\PY{n}{s}\PY{p}{,} \PY{n}{logy}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{zoom-in-on-temperature-peak---mass-fractions-for-species-shared-between-mesa-and-maestro}{%
+\subsubsection{Zoom in on temperature peak - mass fractions for species
+shared between MESA and
+Maestro}\label{zoom-in-on-temperature-peak---mass-fractions-for-species-shared-between-mesa-and-maestro}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{shared\PYZus{}species}\PY{p}{:}
+             \PY{n}{plot\PYZus{}field}\PY{p}{(}\PY{n}{field}\PY{o}{=}\PY{n}{s}\PY{p}{,} \PY{n}{logy}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{xlim}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{71.8}\PY{p}{,} \PY{l+m+mf}{72.4}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{plot\PYZus{}enuc}\PY{p}{(}\PY{n}{ylim}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{1.0e\PYZhy{}90}\PY{p}{,} \PY{l+m+mf}{1.0e20}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{zoom-in-on-peak-temperature}{%
+\subsubsection{Zoom in on peak
+temperature}\label{zoom-in-on-peak-temperature}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{plot\PYZus{}enuc}\PY{p}{(}\PY{n}{xlim}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{]}\PY{p}{,} \PY{n}{ylim}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{1.0e11}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plot\PYZus{}enuc}\PY{p}{(}\PY{n}{xlim}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{71.8}\PY{p}{,} \PY{l+m+mf}{72.4}\PY{p}{]}\PY{p}{,} \PY{n}{ylim}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{1.0e7}\PY{p}{,} \PY{l+m+mf}{5.0e10}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{zoom-in-on-300-km-radius}{%
+\subsubsection{Zoom in on \textasciitilde{}300 km
+radius}\label{zoom-in-on-300-km-radius}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{plot\PYZus{}enuc}\PY{p}{(}\PY{n}{xlim}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{250}\PY{p}{,} \PY{l+m+mi}{325}\PY{p}{]}\PY{p}{,} \PY{n}{ylim}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{1.0e\PYZhy{}30}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{print-central-conditions-in-the-starkiller-mesa-model-vs-starkiller-maestro-model}{%
+\subsection{Print central conditions in the StarKiller-MESA model vs
+StarKiller-Maestro
+model}\label{print-central-conditions-in-the-starkiller-mesa-model-vs-starkiller-maestro-model}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{StarKiller\PYZhy{}MESA model core:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{radius = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mesa\PYZus{}data}\PY{o}{.}\PY{n}{radius\PYZus{}cm}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{sk\PYZus{}burn\PYZus{}results}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{state}\PY{p}{)}
+         \PY{n}{sk\PYZus{}mesa\PYZus{}core} \PY{o}{=} \PY{n}{sk\PYZus{}burn\PYZus{}results}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+StarKiller-MESA model core:
+radius = 4238.740586226362
+<burn\_t>\{
+    rho : 8357088644.807663,
+    t : 656576876.0892806,
+    e : 2.4376186957017733e+18,
+    xn : array([0.00000000e+00, 8.96186261e-23, 5.99994533e-01, 3.92886298e-01,
+       2.00272928e-09, 7.11563848e-03, 4.83382902e-16, 0.00000000e+00,
+       3.52829753e-06, 0.00000000e+00, 0.00000000e+00]),
+    cv : 13443541.124250965,
+    cp : 13469891.007039556,
+    y\_e : 0.46071137008219526,
+    eta : 134.03551389904297,
+    cs : 1086321005.4956038,
+    dx : 6.9492501426787e-310,
+    abar : 17.391340262069377,
+    zbar : 8.012388199703627,
+    t\_old : 6.9492501495557e-310,
+    dcvdt : 6.9492501259437e-310,
+    dcpdt : 6.94925012823816e-310,
+    ydot : array([ 3.79586303e-17, -2.15615792e-17, -1.37362275e-16,  1.25751835e-12,
+        1.25920951e-13, -1.38340536e-12,  5.50015407e-19,  6.16893737e-38,
+        1.34778166e-17,  3.79586303e-17,  4.98304614e-25, -1.20200533e+00,
+       -1.61908807e+07]),
+    jac : array([[6.94925011e-310, 6.94925006e-310, 6.94925004e-310,
+        6.94925002e-310, 6.94924997e-310, 6.94924995e-310,
+        6.94925027e-310, 6.94925025e-310, 6.94925022e-310,
+        6.94925018e-310, 6.94925015e-310, 6.94925013e-310,
+        6.94925011e-310],
+       [6.94925011e-310, 6.94925006e-310, 6.94925004e-310,
+        6.94925002e-310, 6.94924997e-310, 6.94924995e-310,
+        6.94925027e-310, 6.94925025e-310, 6.94925023e-310,
+        6.94925018e-310, 6.94925016e-310, 6.94925013e-310,
+        6.94925011e-310],
+       [6.94925009e-310, 6.94925007e-310, 6.94925004e-310,
+        6.94925000e-310, 6.94924997e-310, 6.94924995e-310,
+        6.94925028e-310, 6.94925025e-310, 6.94925020e-310,
+        6.94925018e-310, 6.94925016e-310, 6.94925014e-310,
+        6.94925009e-310],
+       [6.94925009e-310, 6.94925007e-310, 6.94925005e-310,
+        6.94925000e-310, 6.94924998e-310, 6.94924995e-310,
+        6.94925028e-310, 6.94930713e-310, 6.94925021e-310,
+        6.94925018e-310, 6.94925016e-310, 6.94925011e-310,
+        6.94925009e-310],
+       [6.94925009e-310, 6.94925007e-310, 6.94925002e-310,
+        6.94925000e-310, 6.94924998e-310, 6.94924993e-310,
+        6.94925025e-310, 6.94925023e-310, 6.94925021e-310,
+        6.94925019e-310, 6.94925014e-310, 6.94925011e-310,
+        6.94925009e-310],
+       [6.94925009e-310, 6.94925007e-310, 6.94925002e-310,
+        6.94925000e-310, 6.94924998e-310, 0.00000000e+000,
+        6.94925026e-310, 6.94925023e-310, 6.94925021e-310,
+        6.94925019e-310, 6.94925014e-310, 6.94925012e-310,
+        6.94925009e-310],
+       [6.94925010e-310, 6.94925005e-310, 6.94925003e-310,
+        6.94925000e-310, 6.94924996e-310, 1.97990385e-318,
+        6.94925026e-310, 6.94925023e-310, 6.94925021e-310,
+        6.94925016e-310, 6.94930713e-310, 6.94925012e-310,
+        6.94925010e-310],
+       [6.94925007e-310, 6.94925005e-310, 6.94925003e-310,
+        6.94925001e-310, 6.94924996e-310, 4.65993225e-310,
+        6.94925026e-310, 6.94925024e-310, 6.94925019e-310,
+        6.94925017e-310, 6.94925014e-310, 6.94925012e-310,
+        6.94925007e-310],
+       [6.94925008e-310, 6.94925005e-310, 6.94925003e-310,
+        6.94924998e-310, 6.94924996e-310, 6.94930722e-310,
+        6.94925026e-310, 6.94925024e-310, 6.94925019e-310,
+        6.94925017e-310, 6.94925014e-310, 6.94925012e-310,
+        6.94925008e-310],
+       [6.94925008e-310, 6.94925006e-310, 6.94925003e-310,
+        6.94924999e-310, 6.94924996e-310, 0.00000000e+000,
+        6.94925027e-310, 6.94925022e-310, 6.94925019e-310,
+        6.94925017e-310, 6.94925015e-310, 6.94925010e-310,
+        6.94925008e-310],
+       [6.94925008e-310, 6.94925006e-310, 6.94925001e-310,
+        6.94924999e-310, 6.94924997e-310, 0.00000000e+000,
+        6.94925024e-310, 6.94925022e-310, 6.94925020e-310,
+        6.94925017e-310, 6.94925015e-310, 6.94925010e-310,
+        6.94925008e-310],
+       [6.94925008e-310, 6.94925003e-310, 6.94925001e-310,
+        6.94924999e-310, 6.94924997e-310, 6.94930712e-310,
+        6.94925024e-310, 6.94925022e-310, 6.94925020e-310,
+        6.94925015e-310, 6.94925013e-310, 6.94925010e-310,
+        6.94925008e-310],
+       [6.94925008e-310, 6.94925004e-310, 6.94925001e-310,
+        6.94924999e-310, 6.94924994e-310, 7.31217156e-322,
+        6.94925025e-310, 6.94925022e-310, 6.94925020e-310,
+        6.94925015e-310, 6.94925013e-310, 6.94925011e-310,
+        6.94925008e-310]]),
+    self\_heat : -1496870240,
+    i : 32748,
+    j : -1496823864,
+    k : 32748,
+    n\_rhs : -1496777488,
+    n\_jac : 32748,
+    time : 6.949250067493e-310,
+    success : -1496684672\}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{StarKiller\PYZhy{}Maestro model core:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{radius = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{maestro\PYZus{}data}\PY{o}{.}\PY{n}{data}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{radius}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{sk\PYZus{}maestro\PYZus{}burn\PYZus{}results}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{state}\PY{p}{)}
+         \PY{n}{sk\PYZus{}maestro\PYZus{}core} \PY{o}{=} \PY{n}{sk\PYZus{}maestro\PYZus{}burn\PYZus{}results}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+StarKiller-Maestro model core:
+radius = 9765.625
+<burn\_t>\{
+    rho : 8348566865.007088,
+    t : 656585951.5581328,
+    e : 2.436851939389143e+18,
+    xn : array([1.00000046e-30, 8.92493058e-23, 5.99994547e-01, 3.92704949e-01,
+       2.02111807e-09, 7.29698207e-03, 4.96502540e-16, 1.00000046e-30,
+       3.52017152e-06, 1.00000046e-30, 1.00000046e-30]),
+    cv : 13444110.154561128,
+    cp : 13470469.479940196,
+    y\_e : 0.4607295050374543,
+    eta : 133.98706481708632,
+    cs : 1086164797.2882276,
+    dx : 0.0,
+    abar : 17.391340173721446,
+    zbar : 8.012703550176676,
+    t\_old : 0.0,
+    dcvdt : 0.0,
+    dcpdt : 8.4879959384e-314,
+    ydot : array([ 3.77137454e-17, -2.14245793e-17, -1.36464713e-16,  1.26306948e-12,
+        1.21821687e-13, -1.38485747e-12,  5.60001897e-19,  6.29108323e-38,
+        1.33908813e-17,  3.77137454e-17,  4.93356513e-25, -1.20443864e+00,
+       -1.62243539e+07]),
+    jac : array([[6.42285340e-323, 1.26480805e-319, 0.00000000e+000,
+        0.00000000e+000, 2.97079538e-313, 0.00000000e+000,
+        0.00000000e+000, 1.26480805e-321, 0.00000000e+000,
+        0.00000000e+000, 0.00000000e+000, 0.00000000e+000,
+        6.94930722e-310],
+       [1.65689855e-319, 0.00000000e+000, 0.00000000e+000,
+        2.12200844e-314, 0.00000000e+000, 0.00000000e+000,
+        4.24399286e-313, 0.00000000e+000, 0.00000000e+000,
+        0.00000000e+000, 0.00000000e+000, 0.00000000e+000,
+        6.94930722e-310],
+       [0.00000000e+000, 0.00000000e+000, 3.18299503e-313,
+        0.00000000e+000, 0.00000000e+000, 3.18299503e-313,
+        0.00000000e+000, 0.00000000e+000, 2.12201236e-314,
+        0.00000000e+000, 0.00000000e+000, 0.00000000e+000,
+        6.94925013e-310],
+       [0.00000000e+000, 2.12201615e-314, 0.00000000e+000,
+        0.00000000e+000, 3.18299503e-313, 0.00000000e+000,
+        0.00000000e+000, 4.45619244e-313, 0.00000000e+000,
+        0.00000000e+000, 0.00000000e+000, 0.00000000e+000,
+        6.94925013e-310],
+       [2.97079525e-313, 0.00000000e+000, 0.00000000e+000,
+        2.12201615e-314, 0.00000000e+000, 0.00000000e+000,
+        2.97079538e-313, 0.00000000e+000, 0.00000000e+000,
+        0.00000000e+000, 0.00000000e+000, 0.00000000e+000,
+        6.94925013e-310],
+       [0.00000000e+000, 0.00000000e+000, 3.39519447e-313,
+        0.00000000e+000, 0.00000000e+000, 3.81959363e-313,
+        0.00000000e+000, 9.88131292e-323, 2.12201615e-314,
+        0.00000000e+000, 0.00000000e+000, 0.00000000e+000,
+        6.94925013e-310],
+       [0.00000000e+000, 6.36600015e-314, 0.00000000e+000,
+        0.00000000e+000, 3.60739405e-313, 0.00000000e+000,
+        0.00000000e+000, 1.69759866e-313, 0.00000000e+000,
+        0.00000000e+000, 0.00000000e+000, 0.00000000e+000,
+        6.94925013e-310],
+       [2.12200857e-314, 0.00000000e+000, 0.00000000e+000,
+        6.36600015e-314, 0.00000000e+000, 0.00000000e+000,
+        2.12201236e-314, 0.00000000e+000, 0.00000000e+000,
+        0.00000000e+000, 0.00000000e+000, 0.00000000e+000,
+        6.37344683e-322],
+       [0.00000000e+000, 0.00000000e+000, 2.12200857e-314,
+        0.00000000e+000, 0.00000000e+000, 4.03179328e-313,
+        0.00000000e+000, 0.00000000e+000, 1.26480805e-321,
+        0.00000000e+000, 0.00000000e+000, 0.00000000e+000,
+        6.94930722e-310],
+       [6.91691904e-323, 3.16202013e-320, 0.00000000e+000,
+        0.00000000e+000, 8.48799594e-314, 0.00000000e+000,
+        0.00000000e+000, 4.66839202e-313, 0.00000000e+000,
+        0.00000000e+000, 0.00000000e+000, 0.00000000e+000,
+        6.94930722e-310],
+       [1.90979824e-313, 0.00000000e+000, 7.41098469e-323,
+        3.16202013e-320, 0.00000000e+000, 9.38724727e-323,
+        2.12201615e-314, 0.00000000e+000, 0.00000000e+000,
+        0.00000000e+000, 0.00000000e+000, 0.00000000e+000,
+        6.94925014e-310],
+       [0.00000000e+000, 0.00000000e+000, 1.90979824e-313,
+        0.00000000e+000, 7.90505033e-323, 1.69759866e-313,
+        0.00000000e+000, 0.00000000e+000, 2.54639638e-313,
+        0.00000000e+000, 0.00000000e+000, 6.94925013e-310,
+        6.94925014e-310],
+       [0.00000000e+000, 2.97079538e-313, 0.00000000e+000,
+        0.00000000e+000, 2.97079538e-313, 0.00000000e+000,
+        0.00000000e+000, 2.97079538e-313, 6.94929490e-310,
+        0.00000000e+000, 0.00000000e+000, 9.53546696e-322,
+        6.94925014e-310]]),
+    self\_heat : -1495292992,
+    i : 32748,
+    j : -1495292632,
+    k : 32748,
+    n\_rhs : -1495292272,
+    n\_jac : 32748,
+    time : 6.94925013859575e-310,
+    success : -1495291552\}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k}{def} \PY{n+nf}{pdiff}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{xref}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{l+m+mf}{100.0}\PY{o}{*}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{xref}\PY{p}{)}\PY{o}{/}\PY{n}{xref}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{density }\PY{l+s+si}{\PYZpc{} d}\PY{l+s+s1}{iff = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{pdiff}\PY{p}{(}\PY{n}{sk\PYZus{}maestro\PYZus{}core}\PY{o}{.}\PY{n}{state}\PY{o}{.}\PY{n}{rho}\PY{p}{,} \PY{n}{sk\PYZus{}mesa\PYZus{}core}\PY{o}{.}\PY{n}{state}\PY{o}{.}\PY{n}{rho}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temperature }\PY{l+s+si}{\PYZpc{} d}\PY{l+s+s1}{iff = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{pdiff}\PY{p}{(}\PY{n}{sk\PYZus{}maestro\PYZus{}core}\PY{o}{.}\PY{n}{state}\PY{o}{.}\PY{n}{t}\PY{p}{,} \PY{n}{sk\PYZus{}mesa\PYZus{}core}\PY{o}{.}\PY{n}{state}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{p}{(}\PY{n}{xmaestro}\PY{p}{,} \PY{n}{xmesa}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{sk\PYZus{}maestro\PYZus{}core}\PY{o}{.}\PY{n}{state}\PY{o}{.}\PY{n}{xn}\PY{p}{,} \PY{n}{sk\PYZus{}mesa\PYZus{}core}\PY{o}{.}\PY{n}{state}\PY{o}{.}\PY{n}{xn}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{xn(}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{) }\PY{l+s+si}{\PYZpc{} d}\PY{l+s+s1}{iff = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{ecsn}\PY{o}{.}\PY{n}{short\PYZus{}species\PYZus{}names}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{pdiff}\PY{p}{(}\PY{n}{xmaestro}\PY{p}{,} \PY{n}{xmesa}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+density \% diff = -0.10197067618601745
+temperature \% diff = 0.0013822400974913848
+xn(h1) \% diff = inf
+xn(he4) \% diff = -0.4121021196308629
+xn(o16) \% diff = 2.3468657691855254e-06
+xn(o20) \% diff = -0.046158281066432334
+xn(f20) \% diff = 0.9181865326014039
+xn(ne20) \% diff = 2.5485216657050387
+xn(mg24) \% diff = 2.714129345751336
+xn(al27) \% diff = inf
+xn(si28) \% diff = -0.2303095616849742
+xn(p31) \% diff = inf
+xn(s32) \% diff = inf
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/eugene/.local/lib/python3.7/site-packages/ipykernel\_launcher.py:2: RuntimeWarning: divide by zero encountered in double\_scalars
+  
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
